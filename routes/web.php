@@ -11,6 +11,16 @@
 |
 */
 
+
+
+Route::any('/verifyemail/{token}/{email}', 'ApiloginController@Verifyemail');
+
+// To get the email of the verification.
+Route::get('/email', function () {
+	$data = array('name' => 'Jigs','email' => 'viranijignesh91@gmail.com', 'code' => str_random(25));
+    return view('email.account_verification', $data);
+});
+
 Route::get('/', function () {
     return view('welcome');
 });

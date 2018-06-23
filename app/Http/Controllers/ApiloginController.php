@@ -24,7 +24,8 @@ use Carbon\Carbon;
 
 class ApiloginController extends Controller
 {
-    //
+
+    // Do 
     public function Dologin(Request $request){
 
     	//global declaration
@@ -104,11 +105,13 @@ class ApiloginController extends Controller
 				'password' => Input::get('password'),
 				'email' => Input::get('email'),
 				'lang' => Input::get('lang'),
+				'dob' => Input::get('dob'),
 				'name' => Input::get('name')
 			), array(
 				'password' => 'required',
 				'name' => 'required',
 				'lang' => 'required',
+				'dob' => 'required',
 				'email' => 'required'
 			));
 			
@@ -120,25 +123,43 @@ class ApiloginController extends Controller
 				
 				App::setLocale($request->get('lang'));
 				$checkUserExist = Apiuser::where('email', $request->get('email'))->get()->toArray();
-				
+				// Not available
 				if(!$checkUserExist){
 					
-					// Not available
+					$emailToken = str_random(10);
+					
 					$addUser = new Apiuser();
 					$addUser->name = $request->get('name');
 					$addUser->email = Input::get('email');
-					$addUser->phone_number = Input::get('mobile');
 					$addUser->facebook_id = '';
-					$addUser->google_id = '';
+					$addUser->dob = Input::get('dob');
 					$addUser->password = Hash::make(Input::get('password'));
+					$addUser->verification_token = $emailToken;
 					$addUser->login_type = 1;
-					$addUser->status = 1; // pending OTP verification;
+					$addUser->status = 0; // pending OTP verification;
 					$addUser->created_at = date('Y-m-d H:i:s');
 					$addUser->save();
 					
 					// To add user.
 					if($addUser){
-						## SEND AN EMAIL HERE.
+
+						$dataArray = array();
+				        $dataArray['name'] = $request->get('name');
+				        $dataArray['code'] =  $emailToken;
+				        $dataArray['email'] =  Input::get('email');
+
+				        $recepients = Input::get('email');
+				        $fromEmail = 'noreplay@hrn.com';
+				        $fromEmailName = "LONDON HOT RIGHT NOW!";
+				        $mailSubject = 'London HRN: Email verification';
+
+				        ## SEND AN EMAIL HERE.
+						Mail::send('email.account_verification', $dataArray, function ($message) use ($dataArray, $fromEmail, $fromEmailName, $recepients, $mailSubject) {
+				            $message->from($fromEmail, $fromEmailName);
+				            $message->to($recepients);
+				            $message->subject($mailSubject);
+				        });
+						
 						$ResponseData['success'] = true;
 						$ResponseData['data'] = Apiuser::find($addUser->id)->toArray();
 						$ResponseData['message'] = trans('message.message.USER_SIGNIP');
@@ -169,6 +190,7 @@ class ApiloginController extends Controller
         //get data from request and process
 		$PostData = Input::all();
 		App::setLocale($request->get('lang'));
+
 		if (isset($PostData) && !empty($PostData)) {
 
             //make validator for facebook
@@ -202,54 +224,20 @@ class ApiloginController extends Controller
 			$ResponseData['message'] = trans('message.message.INVALID_PARAMS');
 			$ResponseData['data'] = new stdClass();
 		}
+
 		//print response.
 		return Response::json($ResponseData, 200, [], JSON_NUMERIC_CHECK);
 	}
 
-	//To login with  Google
-	public function Dologingoogle(Request $request){
+	// Verify the email
+	public function Verifyemail(Request $request, $token, $email){
 
-		//global declaration
-		$ResponseData['success'] =  false;
-		$ResponseData = array();
-
-        //get data from request and process
-		$PostData = Input::all();
-		 App::setLocale($request->get('lang'));
-		if (isset($PostData) && !empty($PostData)) {
-
-            //make validator for facebook
-			$ValidateGoogle = Validator::make(array(
-				'google_id' => Input::get('google_id'),
-				'lang' => Input::get('lang')
-			), array(
-				'google_id' => 'required',
-				'lang' => 'required'
-			));
-			if ($ValidateGoogle->fails()) {
-				$ResponseData['message'] = $ValidateGoogle->messages()->first();
-				$ResponseData['success'] =  false;
-				$ResponseData['data'] = new stdClass();
-			} else {
-				$CheckGoogleLogin = Apiuser::CheckGooleUserExist($PostData);
-				if ($CheckGoogleLogin['status'] == 1) {
-					$ResponseData['success']  = true;
-					$ResponseData['message'] = $CheckGoogleLogin['message'];
-					$ResponseData['data'] = $CheckGoogleLogin['user_data'];
-				} else {
-					$ResponseData['success'] =  false;
-					$ResponseData['message'] = $CheckGoogleLogin['message'];
-					$ResponseData['data'] = new stdClass();
-				}
-			}
-		} else {
-            //print error response
-			$ResponseData['success'] =  false;
-			$ResponseData['message'] = Config('message.message.INVALID_PARAMS');
-			$ResponseData['data'] = new stdClass();
+		if(isset($email) && isset($token)){
+			return url('/');
+		}else{
+			return url('/');
 		}
-		//print response.
-		return Response::json($ResponseData, 200, [], JSON_NUMERIC_CHECK);
 	}
+
 
 }

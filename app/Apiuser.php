@@ -7,6 +7,7 @@ use DB;
 // To check Api user is exist or not.
 class Apiuser extends Model
 {
+
     protected $fillable = [
         'name','phone_number','email', 'password', 'facebook_id', 'google_id', 'login_type','created_at'
     ];
@@ -64,55 +65,6 @@ class Apiuser extends Model
         return $ReturnData;
     }
 
-    // To check google user is exist or not.
-    public static function CheckGooleUserExist($Params){
-    
-        //global declaration
-        $ReturnData = array();
-        $CreatedOn = date('Y-m-d H:i:s');
-        //extract params.
-        extract($Params);
-        
-        $QueryUser = DB::table('users')
-                          ->select(DB::Raw('id as user_id'),  'name','profile_pic', 'google_id', 'status', 'login_type', 'phone_number')
-                        ->where('google_id', $google_id)
-                        ->take(1)
-                        ->first();
-
-        $ResultUser = json_decode(json_encode($QueryUser), true);
-
-        if ($ResultUser) {
-                $ReturnData['status'] = true;
-                $ReturnData['message'] = trans('message.message.LOGIN_SUCCESS');
-                $ReturnData['user_data'] = $ResultUser;
-        } else { //USER DOESTNT EXISTS
-           
-            //generate new referral code for profile
-            $InsertArray = array(
-                'name' => isset($name) ? $name : '',
-                'google_id' => $google_id,
-                'login_type' => 3,
-                'profile_pic' => isset($profile_pic) && $profile_pic != '' ? $profile_pic : '',
-                'status' => 1,
-                'created_at' => $CreatedOn,
-            );
-
-            $RegisterUser = DB::table('users')->insertGetId($InsertArray);
-            if (isset($RegisterUser) && $RegisterUser > 0) {
-                //get user details
-                $GetUserProfile = self::GetProfile($RegisterUser);
-                $ReturnData['status'] = true;
-                $ReturnData['message'] = trans('message.message.LOGIN_SUCCESS');
-                $ReturnData['user_data'] = $GetUserProfile['user_data'];
-            }else{
-                $ReturnData['status'] = false;
-                $ReturnData['message'] = trans('message.message.GENERAL_ERROR');
-            }
-        }
-
-        return $ReturnData;        
-    }
-
     // To profile of users
     public static function GetProfile($UserId) {
 
@@ -124,16 +76,16 @@ class Apiuser extends Model
                                 'login_type',
                                 'facebook_id',
                                 'email',
-                                'google_id',
                                 'phone_number',
                                 'profile_pic')
-                    ->where('id', $UserId)
-                    ->first();
+                            ->where('id', $UserId)
+                            ->first();
 
         $userData = json_decode(json_encode($queryUser), true);
         
         // To user data
         if ($userData) {
+            
             // Profile picture.
             if($userData['profile_pic'] !=''){
                $userData['profile_pic'] = self::Getuserphoto(array('user_id' => $userData['user_id'])); 

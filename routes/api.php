@@ -13,8 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Login routes.
 Route::any('/dologin', "ApiloginController@Dologin");
+Route::any('/signup', 'ApiloginController@Dosignup');
+Route::any('/fblogin', 'ApiloginController@DoLoginfacebook');
