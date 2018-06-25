@@ -32,7 +32,7 @@ Route::group(['prefix' => 'manage'], function () {
 
 //initial route for dashboard to load layout master
 Route::middleware('ManageAuth')->get('manage/dashboard', function () {
-    return view('layouts.managemaster');
+    return view('layouts.master');
 });
 
 Route::any('manage/dologin', 'LoginController@Dologin');
