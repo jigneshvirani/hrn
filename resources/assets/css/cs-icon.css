@@ -1,0 +1,298 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?le5069');
+  src:  url('fonts/icomoon.eot?le5069#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?le5069') format('truetype'),
+    url('fonts/icomoon.woff?le5069') format('woff'),
+    url('fonts/icomoon.svg?le5069#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="csi-"], [class*=" csi-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.csi-clock:before {
+  content: "\e940";
+}
+.csi-double-arrow-right:before {
+  content: "\e941";
+}
+.csi-info-triangle:before {
+  content: "\e942";
+}
+.csi-minus:before {
+  content: "\e943";
+}
+.csi-upload:before {
+  content: "\e944";
+}
+.csi-zoom-in:before {
+  content: "\e945";
+}
+.csi-birthday-calendar:before {
+  content: "\e911";
+
+}
+.csi-pdf-file:before {
+  content: "\e913";
+
+}
+.csi-copy-file:before {
+  content: "\e914";
+
+}
+.csi-meeting:before {
+  content: "\e915";
+
+}
+.csi-date-time:before {
+  content: "\e916";
+
+}
+.csi-building:before {
+  content: "\e912";
+
+}
+.csi-size:before {
+  content: "\e917";
+   
+}
+.csi-home3:before {
+  content: "\e918";
+
+}
+.csi-image:before {
+  content: "\e919";
+
+}
+.csi-map-marker:before {
+  content: "\e91a";
+
+}
+.csi-oops-error:before {
+  content: "\e91b";
+
+}
+.csi-like:before {
+  content: "\e91c";
+
+}
+.csi-dis-like:before {
+  content: "\e92b";
+
+}
+.csi-cloud-upload:before {
+  content: "\e91d";
+
+}
+.csi-arrow-right:before {
+  content: "\e925";
+
+}
+.csi-arrow-down:before {
+  content: "\e926";
+
+}
+.csi-arrow-left:before {
+  content: "\e927";
+
+}
+.csi-arrow-up:before {
+  content: "\e928";
+
+}
+.csi-attachment-file:before {
+  content: "\e92a";
+
+}
+.csi-call:before {
+  content: "\e91e";
+
+}
+.csi-email:before {
+  content: "\e91f";
+}
+.csi-sound:before {
+  content: "\e920";
+
+}
+.csi-money:before {
+  content: "\e921";
+
+}
+.csi-square:before {
+  content: "\e922";
+  color: #000;
+}
+.csi-send:before {
+  content: "\e923";
+
+}
+.csi-network:before {
+  content: "\e924";
+
+}
+.csi-calendar:before {
+  content: "\e92c";
+
+}
+.csi-hospital:before {
+  content: "\e92d";
+
+}
+.csi-users:before {
+  content: "\e92e";
+
+}
+.csi-labour:before {
+  content: "\e92f";
+
+}
+.csi-plus:before {
+  content: "\e930";
+
+}
+.csi-refresh2:before {
+  content: "\e931";
+
+}
+.csi-navigation:before {
+  content: "\e932";
+
+}
+.csi-duplicate:before {
+  content: "\e933";
+
+}
+.csi-download:before {
+  content: "\e93f";
+
+}
+.csi-information:before {
+  content: "\e934";
+}
+.csi-user2:before {
+  content: "\e935";
+
+}
+.csi-delete:before {
+  content: "\e936";
+
+}
+.csi-file:before {
+  content: "\e937";
+
+}
+.csi-search2:before {
+  content: "\e938";
+  color: #8f8d8d;
+}
+.csi-view:before {
+  content: "\e93e";
+
+}
+.csi-document-information:before {
+  content: "\e929";
+
+}
+.csi-edit:before {
+  content: "\e939";
+
+}
+.csi-document-delete:before {
+  content: "\e93a";
+
+}
+.csi-check-circle:before {
+  content: "\e93b";
+
+}
+.csi-close-circle:before {
+  content: "\e93c";
+
+}
+.csi-sync:before {
+  content: "\e93d";
+
+}
+.csi-right-arrow:before {
+  content: "\e90c";
+
+}
+.csi-kes-money:before {
+  content: "\e90d";
+
+}
+.csi-user:before {
+  content: "\e90e";
+
+}
+.csi-home2:before {
+  content: "\e90f";
+
+}
+.csi-refresh:before {
+  content: "\e910";
+
+}
+.csi-Dashboard:before {
+  content: "\e90a";
+
+}
+.csi-search:before {
+  content: "\e90b";
+  color: #8f8d8d;
+}
+.csi-accounts:before {
+  content: "\e900";
+
+}
+.csi-campaigns:before {
+  content: "\e901";
+
+}
+.csi-construction:before {
+  content: "\e902";
+
+}
+.csi-home:before {
+  content: "\e903";
+
+}
+.csi-leads:before {
+  content: "\e904";
+
+}
+.csi-mPesatx:before {
+  content: "\e905";
+
+}
+.csi-projects:before {
+  content: "\e906";
+
+}
+.csi-rentals:before {
+  content: "\e907";
+
+}
+.csi-sales:before {
+  content: "\e908";
+
+}
+.csi-staffpayroll:before {
+  content: "\e909";
+
+}

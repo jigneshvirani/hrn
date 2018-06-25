@@ -23,3 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::any('/dologin', "ApiloginController@Dologin");
 Route::any('/signup', 'ApiloginController@Dosignup');
 Route::any('/fblogin', 'ApiloginController@DoLoginfacebook');
+Route::any('/forgotpassword', 'ApiloginController@Forgotpassword');

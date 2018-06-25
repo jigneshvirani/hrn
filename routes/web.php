@@ -21,6 +21,26 @@ Route::get('/email', function () {
     return view('email.account_verification', $data);
 });
 
+Route::get('/manage', function () {
+    return redirect('manage/login');
+});
+
+Route::group(['prefix' => 'manage'], function () {
+    //login bypass for the below listed controllers
+    Route::get('login', 'LoginController@index');
+});
+
+//initial route for dashboard to load layout master
+Route::middleware('ManageAuth')->get('manage/dashboard', function () {
+    return view('layouts.managemaster');
+});
+
+Route::any('manage/dologin', 'LoginController@Dologin');
+Route::any('manage/forgotpassword', 'LoginController@Forgotpassword');
+Route::any('manage/resetpassword', 'LoginController@Resetpassword');
+Route::any('manage/doresetpassword', 'LoginController@Doresetpassword');
+Route::get('manage/logout', 'LoginController@Logout');
+
 Route::get('/', function () {
     return view('welcome');
 });

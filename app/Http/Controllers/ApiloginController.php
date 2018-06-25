@@ -61,11 +61,11 @@ class ApiloginController extends Controller
                     'status'=> 1
                 ];
                 
-                if(Auth::guard('web')->attempt(['email' => Input::get("email"), 'password' => Input::get("password")])) {
+                if(Auth::guard('web')->attempt(['email' => Input::get("email"), 'password' => Input::get("password"), 'status' => 1])) {
 					$getUserData = Apiuser::where('email', $request->get('email'))->first()->toArray();
                 	unset($getUserData['password']);
                 	// Get user info.
-                	//print_r($getUserData['id']);die;
+                	
 					$getuserinfo = Apiuser::GetProfile($getUserData['id']);
                 	$ResponseData['data'] = $getuserinfo;
                     $ResponseData['success'] = true;
@@ -78,7 +78,7 @@ class ApiloginController extends Controller
 			}
 		} else {
             //print error response
-			$ResponseData['success'] =  false;
+			$ResponseData['success'] =  ResponseDatafalse;
 			$ResponseData['message'] = trans('message.message.INVALID_PARAMS');
 			$ResponseData['data'] = new stdClass();
 		}
@@ -123,6 +123,7 @@ class ApiloginController extends Controller
 				
 				App::setLocale($request->get('lang'));
 				$checkUserExist = Apiuser::where('email', $request->get('email'))->get()->toArray();
+
 				// Not available
 				if(!$checkUserExist){
 					
@@ -201,13 +202,16 @@ class ApiloginController extends Controller
 				'facebook_id' => 'required',
 				'lang' => 'required'
 			));
+
 			if ($ValidateFacebook->fails()) {
 				$ResponseData['message'] = $ValidateFacebook->messages()->first();
 				$ResponseData['success'] =  false;
 				$ResponseData['data'] = new stdClass();
 			} else {
 
+				// Check FB login
 				$CheckFBLogin = Apiuser::CheckFbUserExist($PostData);
+				
 				if ($CheckFBLogin['status'] == 1) {
 					$ResponseData['success']  = true;
 					$ResponseData['message'] = $CheckFBLogin['message'];
@@ -229,15 +233,112 @@ class ApiloginController extends Controller
 		return Response::json($ResponseData, 200, [], JSON_NUMERIC_CHECK);
 	}
 
+
 	// Verify the email
 	public function Verifyemail(Request $request, $token, $email){
-
+		
 		if(isset($email) && isset($token)){
-			return url('/');
+
+			$getUser = Apiuser::where('email', $email)->get()->toArray();
+			
+			if(isset($getUser[0]['verification_token']) && $getUser[0]['verification_token'] == $token){
+
+				$updateStatus = Apiuser::find($getUser[0]['id']);
+				$updateStatus->status = 1;
+				$updateStatus->save();
+
+				$request->session()->flash('successMessage', 'Congratulations! Your account has been verified. Welcome to LONDON Hot Right Now!');
+				return redirect('/');
+			}else{
+				$request->session()->flash('errorMessage', 'Oops! something went wrong.');
+				return redirect('/');
+			}
 		}else{
-			return url('/');
+			//$request->session()->flash('errorMessage', 'Oops! something went wrong.');
+			return redirect('/');
 		}
 	}
 
+	// Forgott password.
+	public function Forgotpassword(Request $request){
+
+		//global declaration
+		$ResponseData['success'] =  false;
+		$ResponseData = array();
+
+        //get data from request and process
+		$PostData = Input::all();
+		App::setLocale($request->get('lang'));
+
+		if (isset($PostData) && !empty($PostData)) {
+
+            //make validator for facebook
+			$ValidateFacebook = Validator::make(array(
+				'email' => Input::get('email'),
+				'lang' => Input::get('lang')
+			), array(
+				'email' => 'required',
+				'lang' => 'required'
+			));
+			if ($ValidateFacebook->fails()) {
+				$ResponseData['message'] = $ValidateFacebook->messages()->first();
+				$ResponseData['success'] =  false;
+				$ResponseData['data'] = new stdClass();
+			} else {
+
+				$getUser = Apiuser::where('email', Input::get('email'))->get()->toArray();
+				$input['email'] = Input::get('email');
+
+				$rule = array('email' => 'unique:users,email');
+				$validator = Validator::make($input, $rule);
+				
+				// To make sure that's it.
+				if ($validator->fails()) {
+
+					$emailToken = str_random(5);
+
+					$updateStatus = Apiuser::find($getUser[0]['id']);
+					$updateStatus->password = Hash::make($emailToken);
+					$updateStatus->save();
+
+						$dataArray = array();
+				        $dataArray['name'] = $getUser[0]['name'];
+				        $dataArray['code'] =  $emailToken;
+				        $dataArray['email'] =  Input::get('email');
+
+				        $recepients = Input::get('email');
+				        $fromEmail = 'noreplay@hrn.com';
+				        $fromEmailName = "LONDON HOT RIGHT NOW!";
+				        $mailSubject = 'London HRN: Forgot password';
+
+				        ## SEND AN EMAIL HERE.
+						Mail::send('email.forgotpassword', $dataArray, function ($message) use ($dataArray, $fromEmail, $fromEmailName, $recepients, $mailSubject) {
+				            $message->from($fromEmail, $fromEmailName);
+				            $message->to($recepients);
+				            $message->subject($mailSubject);
+				        });
+
+						$ResponseData['success'] = true;
+						$ResponseData['message'] = trans('message.message.PASSWORD_RESET_SUCCESS');
+						$ResponseData['data'] = new stdClass();
+
+				}else{
+					$ResponseData['success'] = false;
+					$ResponseData['message'] = trans('message.message.NO_EMAIL_FOUND');
+					$ResponseData['data'] = new stdClass();
+				}
+
+				//if(isset($getUser[0][]'email')){}
+			}
+		} else {
+            //print error response
+			$ResponseData['success'] =  false;
+			$ResponseData['message'] = trans('message.message.INVALID_PARAMS');
+			$ResponseData['data'] = new stdClass();
+		}
+
+		//print response.
+		return Response::json($ResponseData, 200, [], JSON_NUMERIC_CHECK);
+	}
 
 }

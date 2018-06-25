@@ -1,0 +1,213 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?5dkz4t');
+  src:  url('fonts/icomoon.eot?5dkz4t#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?5dkz4t') format('truetype'),
+    url('fonts/icomoon.woff?5dkz4t') format('woff'),
+    url('fonts/icomoon.svg?5dkz4t#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="csi-"], [class*=" csi-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.csi-birthday-calendar:before {
+  content: "\e900";
+  color: #d1d2d3;
+}
+.csi-pdf-file:before {
+  content: "\e901";
+  color: #fff;
+}
+.csi-copy-file:before {
+  content: "\e902";
+  color: #fff;
+}
+.csi-meeting:before {
+  content: "\e903";
+  color: #fff;
+}
+.csi-date-time:before {
+  content: "\e904";
+  color: #798ea5;
+}
+.csi-building:before {
+  content: "\e905";
+  color: #798ea5;
+}
+.csi-size:before {
+  content: "\e906";
+  color: #798ea5;
+}
+.csi-home:before {
+  content: "\e907";
+  color: #798ea5;
+}
+.csi-image:before {
+  content: "\e908";
+  color: #798ea5;
+}
+.csi-map-marker:before {
+  content: "\e909";
+  color: #798ea5;
+}
+.csi-oops-error:before {
+  content: "\e90a";
+  color: #798ea5;
+}
+.csi-like:before {
+  content: "\e90b";
+  color: #798ea5;
+}
+.csi-dis-like:before {
+  content: "\e90c";
+  color: #798ea5;
+}
+.csi-cloud-upload:before {
+  content: "\e90d";
+  color: #fff;
+}
+.csi-arrow-right:before {
+  content: "\e90e";
+  color: #fff;
+}
+.csi-arrow-down:before {
+  content: "\e90f";
+  color: #fff;
+}
+.csi-arrow-left:before {
+  content: "\e910";
+  color: #fff;
+}
+.csi-arrow-up:before {
+  content: "\e911";
+  color: #fff;
+}
+.csi-attachment-file:before {
+  content: "\e912";
+  color: #798ea5;
+}
+.csi-call:before {
+  content: "\e913";
+  color: #798ea5;
+}
+.csi-email:before {
+  content: "\e914";
+}
+.csi-sound:before {
+  content: "\e915";
+  color: #798ea5;
+}
+.csi-money:before {
+  content: "\e916";
+  color: #798ea5;
+}
+.csi-square:before {
+  content: "\e917";
+  color: #000;
+}
+.csi-send:before {
+  content: "\e918";
+  color: #fff;
+}
+.csi-network:before {
+  content: "\e919";
+  color: #798ea5;
+}
+.csi-calendar:before {
+  content: "\e91a";
+  color: #fff;
+}
+.csi-hospital:before {
+  content: "\e91b";
+  color: #fff;
+}
+.csi-users:before {
+  content: "\e91c";
+  color: #fff;
+}
+.csi-labour:before {
+  content: "\e91d";
+  color: #fff;
+}
+.csi-plus:before {
+  content: "\e91e";
+  color: #fff;
+}
+.csi-refresh:before {
+  content: "\e91f";
+  color: #fff;
+}
+.csi-navigation:before {
+  content: "\e920";
+  color: #fff;
+}
+.csi-duplicate:before {
+  content: "\e921";
+  color: #fff;
+}
+.csi-download:before {
+  content: "\e922";
+  color: #fff;
+}
+.csi-information:before {
+  content: "\e923";
+  color: #fff;
+}
+.csi-user:before {
+  content: "\e924";
+  color: #fff;
+}
+.csi-delete:before {
+  content: "\e925";
+  color: #fff;
+}
+.csi-file:before {
+  content: "\e926";
+  color: #fff;
+}
+.csi-search:before {
+  content: "\e927";
+  color: #8f8d8d;
+}
+.csi-view:before {
+  content: "\e928";
+  color: #fff;
+}
+.csi-document-information:before {
+  content: "\e929";
+  color: #798ea5;
+}
+.csi-edit:before {
+  content: "\e92a";
+  color: #fff;
+}
+.csi-document-delete:before {
+  content: "\e92b";
+  color: #fff;
+}
+.csi-check-circle:before {
+  content: "\e92c";
+  color: #fff;
+}
+.csi-close-circle:before {
+  content: "\e92d";
+  color: #fff;
+}
+.csi-sync:before {
+  content: "\e92e";
+  color: #fff;
+}

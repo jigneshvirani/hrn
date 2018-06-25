@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" >
         <!-- Styles -->
         <style>
             html, body {
@@ -66,13 +66,20 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            
 
             <div class="content">
+                @if(Session::has('successMessage'))
+                    <p class="alert alert-success">{{ session()->get('successMessage') }}</p>
+                @endif
+                @if(Session::has('errorMessage'))
+                    <p class="alert alert-warning">{{ session()->get('errorMessage') }}</p>
+                @endif
                 <div class="title m-b-md">
                     London Hot Right Now
                 </div>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" ></script>
     </body>
 </html>

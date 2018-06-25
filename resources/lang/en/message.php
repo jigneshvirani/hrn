@@ -18,8 +18,7 @@ return [
 	         'USER_SIGNIP' => 'Thank you for join us.',
 	         'USER_ALREADY_SIGNUP' => 'This email is already registred with us. Please use another one.',
 	         'NO_EMAIL_FOUND' => 'This email is not registred with us. Please try again.',
-	         'POSTAD_SUCCESS' => 'Your delivery has been confirmed. Our delivery boy will pickup package shortly.',
-	         'JOB_HISTORY_IS_NOT_AVAILABLE' => 'Seems like there is no previous delivery available.'
+	         'PASSWORD_RESET_SUCCESS' => 'We have send a temporary password to your email. Kindly login trough that password.'
 	    ],
 	    'admin_message' => [
 	    	'SUB_CATEGORY_ADDED' => 'Sub category is added',
